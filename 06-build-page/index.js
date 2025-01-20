@@ -6,8 +6,10 @@ const { compareStyles } = require('../05-merge-styles/index');
 const componentsDir = path.join(__dirname, 'components');
 const templateFile = path.join(__dirname, 'template.html');
 const distDir = path.join(__dirname, 'project-dist');
-const outputPath = path.join(distDir, 'style.css');
-const inputPath = path.join(__dirname, 'styles')
+const outputCssPath = path.join(distDir, 'style.css');
+const inputCssPath = path.join(__dirname, 'styles');
+const outputAssetsPath = path.join(distDir, 'assets');
+const inputAssetsPath = path.join(__dirname, 'assets');
 
 async function templateBuild() {
   const templateContent = await fs.readFile(templateFile, { encoding: 'utf8' });
@@ -25,6 +27,6 @@ async function templateBuild() {
   await fs.writeFile(path.join(distDir, 'index.html'), newIndexContent);
 }
 
-copyFolder(path.join(__dirname, 'assets'), path.join(distDir, 'assets'));
-compareStyles(inputPath, outputPath);
+copyFolder(inputAssetsPath, outputAssetsPath);
+compareStyles(inputCssPath, outputCssPath);
 templateBuild();
